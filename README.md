@@ -1,6 +1,10 @@
 # grunt-targetngmodules
 
-> The best Grunt plugin ever.
+> This Grunt plugin helps make a target app.js for angularjs when you using requirejs with it.
+
+> full inspiration from grunt-targethtml, and share both similar usage.
+
+> specially when you want to use angular-requirejs base project, and looking for a good way both handling html templates(using grunt-html2js) and distribute with requirejs automatically
 
 ## Getting Started
 This plugin requires Grunt `~0.4.3`
@@ -26,61 +30,60 @@ In your project's Gruntfile, add a section named `targetngmodules` to the data o
 grunt.initConfig({
   targetngmodules: {
     options: {
-      // Task-specific options go here.
+      // Task-specific options go here. Not support any Option yet :(
     },
     your_target: {
       // Target-specific file lists and/or options go here.
+      'src/scripts/app.js': 'build/scripts/app.js'
     },
   },
 });
+```
+
+### See What Happen
+```js
+    //in src/scripts/app.js
+    define([
+    	'angular',
+
+        /*(if target dist)
+        'templates/views',
+        */
+    	'directives',
+    	'controllers',
+    	], function (angular) {
+        		return angular.module('mxphone', [
+        			'ngRoute',
+        			'services',
+                    /*(if target dist)
+                     'crazyApp.crazyModules',
+                     */
+        		]);
+        });
+```
+
+```js
+    //in build/scripts/app.js will look like this
+    define([
+    	'angular',
+
+        'templates/views',
+
+    	'directives',
+    	'controllers',
+    	], function (angular) {
+        		return angular.module('mxphone', [
+        			'ngRoute',
+        			'services',
+
+                     'crazyApp.crazyModules',
+
+        		]);
+        });
 ```
 
 ### Options
-
-#### options.separator
-Type: `String`
-Default value: `',  '`
-
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
-
-### Usage Examples
-
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  targetngmodules: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  targetngmodules: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
+Not Supported yet
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

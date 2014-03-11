@@ -29,12 +29,6 @@ module.exports = function(grunt) {
         // Configuration to be run (and then tested).
         targetngmodules: {
             dist: {
-                options: {
-                    curlyTags: {
-                        cssver: '001',
-                        jsver: '002'
-                    }
-                },
                 files: {
                     'tmp/app.js': 'test/fixtures/app.js'
                 }
@@ -61,5 +55,5 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['clean', 'targetngmodules']);
 
     // By default, lint and run all tests.
-    grunt.registerTask('default', ['jshint', 'test']);
+    // grunt.registerTask('default', ['jshint', 'test']);
 };
